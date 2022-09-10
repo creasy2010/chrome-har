@@ -113,7 +113,7 @@ module.exports = {
                 if (params.redirectResponse) {
                   populateRedirectResponse(page, params, entries, options);
                 }
-              }
+            }
             }
 
             if (responsesWithoutPage.length > 0) {
@@ -175,8 +175,12 @@ module.exports = {
             if (request.isLinkPreload) {
               req._isLinkPreload = true;
             }
+              if( request.applicationData){
+                  req.applicationData=request.applicationData;
+              }
 
-            const entry = {
+
+              const entry = {
               cache: {},
               startedDateTime: '',
               __requestWillBeSentTime: params.timestamp,
@@ -382,7 +386,6 @@ module.exports = {
                 entry => entry._requestId === params.requestId
               );
             }
-
             if (!entry) {
               debug(
                 `Received network response for requestId ${
